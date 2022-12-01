@@ -13,13 +13,18 @@ runInput input = [
         "Top: " <> (T.pack . show $ head sortedElfCalories), 
         "Sum Top 3: " <> (T.pack . show . sum $ L.take 3 sortedElfCalories)
     ]
-    where sortedElfCalories = sortedCalories $ parseElfs input
+    where sortedElfCalories = sortedCalorySum $ parseElfs input
 
 parseElfs :: T.Text -> [Elf]
-parseElfs input = map (read . T.unpack) <$> elfLines
-    where inputLines = T.lines input
-          elfLines = L.splitOn [""] inputLines
+parseElfs input = parseElf <$> (L.splitOn [""] $ T.lines input)
 
-sortedCalories :: [Elf] -> [Calories]
-sortedCalories elfs = L.sortBy (flip compare) $ sum <$> elfs
+parseElf :: [T.Text] -> Elf
+parseElf = map parseCalories
+
+parseCalories :: T.Text -> Calories
+parseCalories = (read . T.unpack) 
+
+sortedCalorySum :: [Elf] -> [Calories]
+sortedCalorySum = L.sortBy (flip compare) . map sum
+
     
