@@ -27,7 +27,7 @@ runDay :: Options -> IO ()
 runDay (Options 1) = run Calories.runInput "input/Day1.txt"
 runDay _ = return ()
 
-run :: (T.Text -> [T.Text]) -> FilePath -> IO ()
+run :: Show a => (T.Text -> a) -> FilePath -> IO ()
 run action file = do
     result <- action <$> T.readFile file
-    forM_ result (putStrLn . T.unpack) 
+    putStrLn $ show result

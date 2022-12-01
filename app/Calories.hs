@@ -4,15 +4,22 @@ import qualified Data.Text as T
 import qualified Data.Text.Read as T
 import qualified Data.List as L
 import qualified Data.List.Split as L
+import Prettyprinter
 
 type Calories = Integer
 type Elf = [Calories]
 
-runInput :: T.Text -> [T.Text]
-runInput input = [
-        "Top: " <> (T.pack . show $ head sortedElfCalories), 
-        "Sum Top 3: " <> (T.pack . show . sum $ L.take 3 sortedElfCalories)
-    ]
+data Result = Result {
+    mostCalories :: Calories,
+    sumTopThreeCalories :: Calories
+} 
+
+instance Show Result where    
+    show (Result {..}) = show . vcat $ (\(key, value) -> fillBreak 12 (pretty key <> ":") <+> pretty value) <$> kvs
+        where kvs = [("Top" :: T.Text, show mostCalories), ("Sum Top 3", show sumTopThreeCalories)]
+
+runInput :: T.Text -> Result
+runInput input = Result (head sortedElfCalories) (sum $ L.take 3 sortedElfCalories)
     where sortedElfCalories = sortedCalorySum $ parseElfs input
 
 parseElfs :: T.Text -> [Elf]
