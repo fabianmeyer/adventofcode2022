@@ -28,10 +28,12 @@ instance Show Result where
 
 -- Entry point
 runInput :: T.Text -> Result
-runInput input = Result firstScore secondScore
-    where freeTournament = parseTournament input
-          firstScore = scoreTournament $ bindTournament firstBinding freeTournament
-          secondScore = scoreTournament $ bindTournament secondBinding freeTournament
+runInput input = solve $ parseTournament input
+
+solve :: Tournament Variable -> Result
+solve freeTournament = Result firstScore secondScore
+        where firstScore = scoreTournament $ bindTournament firstBinding freeTournament
+              secondScore = scoreTournament $ bindTournament secondBinding freeTournament
 
 -- Binding
 bindTournament :: (Round a -> Round RPC) -> Tournament a -> Tournament RPC
