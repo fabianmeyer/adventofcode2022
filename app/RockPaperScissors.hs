@@ -8,7 +8,7 @@ import Prettyprinter
 
 -- Data Types
 data RPC = Rock | Paper | Scissors deriving (Show, Eq)
-data FreeRPC = X | Y | Z  deriving (Show)
+data Variable = X | Y | Z  deriving (Show)
 
 data Round a = Round {
     opponent :: RPC,
@@ -37,12 +37,12 @@ runInput input = Result firstScore secondScore
 bindTournament :: (Round a -> Round RPC) -> Tournament a -> Tournament RPC
 bindTournament = map
 
-firstBinding :: Round FreeRPC -> Round RPC
+firstBinding :: Round Variable -> Round RPC
 firstBinding (Round o X) = Round o Rock
 firstBinding (Round o Y) = Round o Paper
 firstBinding (Round o Z) = Round o Scissors
 
-secondBinding :: Round FreeRPC -> Round RPC
+secondBinding :: Round Variable -> Round RPC
 secondBinding (Round Rock X) = Round Rock Scissors
 secondBinding (Round Rock Z) = Round Rock Paper
 secondBinding (Round Paper X) = Round Paper Rock
@@ -77,15 +77,15 @@ parseRPC "B" = Paper
 parseRPC "C" = Scissors
 parseRPC it = error $ "Error parsing RPC from " <> T.unpack it
 
-parseFreeRPC :: T.Text -> FreeRPC
-parseFreeRPC "X" = X
-parseFreeRPC "Y" = Y
-parseFreeRPC "Z" = Z
-parseFreeRPC it = error $ "Error parsing FreeRPC from " <> T.unpack it
+parseVariable :: T.Text -> Variable
+parseVariable "X" = X
+parseVariable "Y" = Y
+parseVariable "Z" = Z
+parseVariable it = error $ "Error parsing variable from " <> T.unpack it
 
-parseRound :: T.Text -> Round FreeRPC
-parseRound line = Round (parseRPC fst) (parseFreeRPC snd)
+parseRound :: T.Text -> Round Variable
+parseRound line = Round (parseRPC fst) (parseVariable snd)
     where [fst, snd] = T.splitOn " " line
 
-parseTournament :: T.Text -> Tournament FreeRPC
+parseTournament :: T.Text -> Tournament Variable
 parseTournament input = parseRound <$> T.lines input
