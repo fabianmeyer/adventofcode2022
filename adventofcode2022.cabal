@@ -27,6 +27,7 @@ executable adventofcode2022
     -- Modules included in this executable, other than Main.
     other-modules: 
         Calories
+      , RockPaperScissors
 
     extensions: 
         OverloadedStrings

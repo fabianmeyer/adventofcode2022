@@ -33,5 +33,3 @@ parseCalories = (read . T.unpack)
 
 sortedCalorySum :: [Elf] -> [Calories]
 sortedCalorySum = L.sortBy (flip compare) . map sum
-
-    
