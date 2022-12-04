@@ -29,13 +29,15 @@ instance Show Result where
 
 -- Entry point
 runInput :: T.Text -> Result
-runInput input = Result (sum $ priority <$> pairs) (sum $ priority <$> badges)
-    where backpacks = parseBackpack <$> T.lines input
-          pairs = backpacks >>= findPairs
+runInput input = solve $ parseBackpack <$> T.lines input
+
+-- Logic
+solve :: [Backpack] -> Result
+solve backpacks = Result (sum $ priority <$> pairs) (sum $ priority <$> badges)
+    where pairs = backpacks >>= findPairs
           groups = group backpacks
           badges = badge <$> groups
 
--- Logic
 findPairs :: Backpack -> [Item]
 findPairs (Backpack first second) = S.toList $ S.intersection first second
 

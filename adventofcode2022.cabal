@@ -29,6 +29,7 @@ executable adventofcode2022
         Calories
       , RockPaperScissors
       , Backpack
+      , CampCleanup
 
     extensions: 
         OverloadedStrings
