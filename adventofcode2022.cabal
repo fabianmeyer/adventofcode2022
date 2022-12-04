@@ -28,6 +28,7 @@ executable adventofcode2022
     other-modules: 
         Calories
       , RockPaperScissors
+      , Backpack
 
     extensions: 
         OverloadedStrings
@@ -39,5 +40,6 @@ executable adventofcode2022
                     , split
                     , optparse-applicative
                     , prettyprinter
+                    , containers
     hs-source-dirs:   app
     default-language: Haskell2010

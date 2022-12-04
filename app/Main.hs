@@ -7,8 +7,9 @@ import Control.Monad
 import Options.Applicative
 import Data.Semigroup ((<>))
 
-import qualified Calories as Calories
-import qualified RockPaperScissors as RockPaperScissors
+import qualified Calories
+import qualified RockPaperScissors
+import qualified Backpack
 
 data Options = Options
   { day :: Int }
@@ -27,6 +28,8 @@ sample = Options <$> argument auto (metavar "DAY" <> help "Day to run" )
 runDay :: Options -> IO ()
 runDay (Options 1) = run Calories.runInput "input/Day1.txt"
 runDay (Options 2) = run RockPaperScissors.runInput "input/Day2.txt"
+runDay (Options 3) = run Backpack.runInput "input/Day3.txt"
+
 runDay _ = return ()
 
 run :: Show a => (T.Text -> a) -> FilePath -> IO ()
