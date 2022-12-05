@@ -1,17 +1,13 @@
 module SupplyStacks where
 
 import qualified Data.Text as T
-import qualified Data.Text.Read as T
 import qualified Data.List as L
-import qualified Data.List.Split as L
-import qualified Data.Set as S
 import Data.Foldable (foldl')
 import Prettyprinter hiding (group, space)
 import qualified Text.Parsec as P
 import qualified Text.Parsec.Text as P
 import qualified Text.Parsec.Char as P
 import Data.Maybe (catMaybes)
-import Data.Char (digitToInt)
 
 type Crate = Char
 type SupplyStack = [Crate]
