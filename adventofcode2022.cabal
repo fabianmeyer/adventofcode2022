@@ -30,6 +30,7 @@ executable adventofcode2022
       , RockPaperScissors
       , Backpack
       , CampCleanup
+      , SupplyStacks
 
     extensions: 
         OverloadedStrings
@@ -42,5 +43,6 @@ executable adventofcode2022
                     , optparse-applicative
                     , prettyprinter
                     , containers
+                    , parsec
     hs-source-dirs:   app
     default-language: Haskell2010
