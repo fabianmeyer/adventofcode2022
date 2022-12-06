@@ -4,7 +4,7 @@ import qualified Data.Text as T
 import qualified Data.Text.Read as T
 import qualified Data.List as L
 import qualified Data.List.Split as L
-import Prettyprinter
+import PrettyPrint
 
 -- Data Types
 type Calories = Integer
@@ -17,8 +17,9 @@ data Result = Result {
 
 -- Result pretty printing
 instance Show Result where    
-    show (Result {..}) = show . vcat $ (\(key, value) -> fillBreak 12 (pretty key <> ":") <+> pretty value) <$> kvs
-        where kvs = [("Top" :: T.Text, show mostCalories), ("Sum Top 3", show sumTopThreeCalories)]
+    show (Result {..}) = printKeyValuePairs [
+        ("Top" :: T.Text, show mostCalories), 
+        ("Sum Top 3", show sumTopThreeCalories)]
 
 -- Entry point
 runInput :: T.Text -> Result

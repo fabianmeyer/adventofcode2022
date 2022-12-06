@@ -31,6 +31,8 @@ executable adventofcode2022
       , Backpack
       , CampCleanup
       , SupplyStacks
+      , TuningTrouble
+      , PrettyPrint
 
     extensions: 
         OverloadedStrings

@@ -7,8 +7,7 @@ import qualified Data.List.Split as L
 import qualified Data.Set as S
 import qualified Data.Char as C
 import Data.Foldable (foldr1)
-
-import Prettyprinter hiding (group)
+import PrettyPrint
 
 type Item = Char
 type Compartment = S.Set Item
@@ -24,8 +23,9 @@ data Result = Result {
 
 -- Result pretty printing
 instance Show Result where    
-    show (Result {..}) = show . vcat $ (\(key, value) -> fillBreak ((maximum $ T.length . fst <$> kvs) + 3) (pretty key <> ":") <+> pretty value) <$> kvs
-        where kvs = [("Sum of duplicat priorities" :: T.Text, show sumOfDuplicatPriorities), ("sum of badge priorities", show sumOfBadgePriorities)]
+    show (Result {..}) = printKeyValuePairs [
+        ("Sum of duplicat priorities" :: T.Text, show sumOfDuplicatPriorities), 
+        ("sum of badge priorities", show sumOfBadgePriorities)]
 
 -- Entry point
 runInput :: T.Text -> Result

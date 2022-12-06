@@ -3,11 +3,11 @@ module SupplyStacks where
 import qualified Data.Text as T
 import qualified Data.List as L
 import Data.Foldable (foldl')
-import Prettyprinter hiding (group, space)
 import qualified Text.Parsec as P
 import qualified Text.Parsec.Text as P
 import qualified Text.Parsec.Char as P
 import Data.Maybe (catMaybes)
+import PrettyPrint
 
 type Crate = Char
 type SupplyStack = [Crate]
@@ -22,10 +22,10 @@ data Result = Result {
     topCrates9001 :: [Crate]
 } 
 
--- Result pretty printing
 instance Show Result where    
-    show (Result {..}) = show . vcat $ (\(key, value) -> fillBreak ((maximum $ T.length . fst <$> kvs) + 3) (pretty key <> ":") <+> pretty value) <$> kvs
-        where kvs = [("Top Crates 9000" :: T.Text, show topCrates9000), ("Top Crates 9001", show topCrates9001)]
+    show (Result {..}) = printKeyValuePairs [
+        ("Top Crates 9000" :: T.Text, show topCrates9000), 
+        ("Top Crates 9001", show topCrates9001)]
 
 -- Entry point
 runInput :: T.Text -> Result

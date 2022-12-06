@@ -4,7 +4,7 @@ import qualified Data.Text as T
 import qualified Data.Text.Read as T
 import qualified Data.List as L
 import qualified Data.List.Split as L
-import Prettyprinter
+import PrettyPrint
 
 -- Data Types
 data RPC = Rock | Paper | Scissors deriving (Show, Eq)
@@ -23,8 +23,9 @@ data Result = Result {
 } 
 
 instance Show Result where    
-    show (Result {..}) = show . vcat $ (\(key, value) -> fillBreak 15 (pretty key <> ":") <+> pretty value) <$> kvs
-        where kvs = [("First Score" :: T.Text, show firstScore), ("Second Score", show secondScore)]
+    show (Result {..}) = printKeyValuePairs [
+        ("First Score" :: T.Text, show firstScore), 
+        ("Second Score", show secondScore)]
 
 -- Entry point
 runInput :: T.Text -> Result

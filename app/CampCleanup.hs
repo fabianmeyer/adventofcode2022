@@ -6,8 +6,7 @@ import qualified Data.List as L
 import qualified Data.List.Split as L
 import qualified Data.Set as S
 import Data.Foldable (foldr1)
-
-import Prettyprinter hiding (group)
+import PrettyPrint
 
 -- Data Types
 data SectionAssignment = SectionAssignment {
@@ -24,8 +23,9 @@ data Result = Result {
 
 -- Result pretty printing
 instance Show Result where    
-    show (Result {..}) = show . vcat $ (\(key, value) -> fillBreak ((maximum $ T.length . fst <$> kvs) + 3) (pretty key <> ":") <+> pretty value) <$> kvs
-        where kvs = [("Containing Section Assignment Pairs" :: T.Text, show containingSectionAssignmentPairs), ("Overlapping Section Assignment Pairs", show overlappingSectionAssignmentPairs)]
+    show (Result {..}) = printKeyValuePairs [
+        ("Containing Section Assignment Pairs" :: T.Text, show containingSectionAssignmentPairs), 
+        ("Overlapping Section Assignment Pairs", show overlappingSectionAssignmentPairs)]
 
 -- Entry point
 runInput :: T.Text -> Result

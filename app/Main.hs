@@ -12,6 +12,7 @@ import qualified RockPaperScissors
 import qualified Backpack
 import qualified CampCleanup
 import qualified SupplyStacks
+import qualified TuningTrouble
 
 data Options = Options
   { day :: Int }
@@ -33,6 +34,7 @@ runDay (Options 2) = run RockPaperScissors.runInput "input/Day2.txt"
 runDay (Options 3) = run Backpack.runInput "input/Day3.txt"
 runDay (Options 4) = run CampCleanup.runInput "input/Day4.txt"
 runDay (Options 5) = run SupplyStacks.runInput "input/Day5.txt"
+runDay (Options 6) = run TuningTrouble.runInput "input/Day6.txt"
 
 runDay _ = return ()
 
