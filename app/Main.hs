@@ -15,6 +15,7 @@ import qualified SupplyStacks
 import qualified TuningTrouble
 import qualified NoSpaceLeft
 import qualified TreetopTreeHouse
+import qualified RopeBridge
 
 data Options = Options
   { day :: Int }
@@ -39,8 +40,7 @@ runDay (Options 5) = run SupplyStacks.runInput "input/Day5.txt"
 runDay (Options 6) = run TuningTrouble.runInput "input/Day6.txt"
 runDay (Options 7) = run NoSpaceLeft.runInput "input/Day7.txt"
 runDay (Options 8) = run TreetopTreeHouse.runInput "input/Day8.txt"
-
-
+runDay (Options 9) = run RopeBridge.runInput "input/Day9.txt"
 
 runDay _ = return ()
 

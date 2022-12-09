@@ -35,6 +35,7 @@ executable adventofcode2022
       , PrettyPrint
       , NoSpaceLeft
       , TreetopTreeHouse
+      , RopeBridge
 
     extensions: 
         OverloadedStrings
