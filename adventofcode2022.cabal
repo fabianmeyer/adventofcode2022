@@ -36,6 +36,7 @@ executable adventofcode2022
       , NoSpaceLeft
       , TreetopTreeHouse
       , RopeBridge
+      , CathodeRayTube
 
     extensions: 
         OverloadedStrings
