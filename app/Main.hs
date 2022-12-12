@@ -17,6 +17,8 @@ import qualified NoSpaceLeft
 import qualified TreetopTreeHouse
 import qualified RopeBridge
 import qualified CathodeRayTube
+import qualified MonkeyInTheMiddle
+import qualified HillClimbingAlgorithm
 
 data Options = Options
   { day :: Int }
@@ -43,6 +45,8 @@ runDay (Options 7) = run NoSpaceLeft.runInput "input/Day7.txt"
 runDay (Options 8) = run TreetopTreeHouse.runInput "input/Day8.txt"
 runDay (Options 9) = run RopeBridge.runInput "input/Day9.txt"
 runDay (Options 10) = run CathodeRayTube.runInput "input/Day10.txt"
+runDay (Options 11) = run MonkeyInTheMiddle.runInput "input/Day11.txt"
+runDay (Options 12) = run HillClimbingAlgorithm.runInput "input/Day12.txt"
 
 runDay _ = return ()
 

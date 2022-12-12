@@ -1,4 +1,4 @@
-module CathodeRayTube where
+module HillClimbingAlgorithm where
 
 import qualified Data.Text as T
 import qualified Data.List as L
@@ -76,3 +76,43 @@ parseAddX = do
     prefix <- P.option "" $ P.string "-"
     number <- P.many1 P.digit
     return . AddX . read $ prefix <> number
+
+
+-- parseCommand :: P.Parser Command
+-- parseCommand = P.string "$" *> P.space *> (parseChangeDirectory <|> parseListContent)
+    
+-- parseChangeDirectory ::  P.Parser Command
+-- parseChangeDirectory = do
+--         P.string "cd" <* P.space
+--         path <- parsePath
+--         return $ ChangeDirectory path
+
+-- parsePath :: P.Parser Path
+-- parsePath = parseParent <|> parseRoot <|> parseSubDirectory
+
+-- parseParent :: P.Parser Path
+-- parseParent = P.string ".." *> return Parent
+
+-- parseRoot :: P.Parser Path
+-- parseRoot = P.string "/" *> return Root
+
+-- parseSubDirectory :: P.Parser Path
+-- parseSubDirectory = SubDirectory <$> parseName
+
+-- parseListContent ::  P.Parser Command
+-- parseListContent = P.string "ls" *> pure ListContent
+        
+-- parseDirectoryContent :: P.Parser DirectoryContent
+-- parseDirectoryContent = parseDirectory <|> parseFile
+
+-- parseDirectory :: P.Parser DirectoryContent
+-- parseDirectory = Directory <$> (P.string "dir" *> P.space *> parseName)
+
+-- parseFile :: P.Parser DirectoryContent
+-- parseFile = do
+--     size <- read <$> P.many1 P.digit <* P.space
+--     name <- parseName
+--     return $ File name size
+
+-- parseName :: P.Parser T.Text
+-- parseName = T.pack <$> P.many1 (P.satisfy (/= '\n'))
