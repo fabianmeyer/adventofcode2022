@@ -39,7 +39,7 @@ executable adventofcode2022
       , CathodeRayTube
       , MonkeyInTheMiddle
       , HillClimbingAlgorithm
-
+      , DistressSignal
     extensions: 
         OverloadedStrings
       , RecordWildCards

@@ -19,6 +19,7 @@ import qualified RopeBridge
 import qualified CathodeRayTube
 import qualified MonkeyInTheMiddle
 import qualified HillClimbingAlgorithm
+import qualified DistressSignal
 
 data Options = Options
   { day :: Int }
@@ -47,6 +48,7 @@ runDay (Options 9) = run RopeBridge.runInput "input/Day9.txt"
 runDay (Options 10) = run CathodeRayTube.runInput "input/Day10.txt"
 runDay (Options 11) = run MonkeyInTheMiddle.runInput "input/Day11.txt"
 runDay (Options 12) = run HillClimbingAlgorithm.runInput "input/Day12.txt"
+runDay (Options 13) = run DistressSignal.runInput "input/Day13.txt"
 
 runDay _ = return ()
 
