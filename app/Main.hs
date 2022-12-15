@@ -6,6 +6,9 @@ import Control.Monad
 
 import Options.Applicative
 import Data.Semigroup ((<>))
+import qualified Data.Map as M
+import Data.Map (Map)
+import Data.Foldable (traverse_)
 
 import qualified Calories
 import qualified RockPaperScissors
@@ -20,6 +23,7 @@ import qualified CathodeRayTube
 import qualified MonkeyInTheMiddle
 import qualified HillClimbingAlgorithm
 import qualified DistressSignal
+import qualified RegolithReservoir
 
 data Options = Options
   { day :: Int }
@@ -35,24 +39,30 @@ main = runDay =<< execParser opts
 sample :: Parser Options
 sample = Options <$> argument auto (metavar "DAY" <> help "Day to run" )
 
+options :: Map Int (T.Text -> String)
+options = M.fromList [
+    (1, show . Calories.runInput)
+  , (2, show . RockPaperScissors.runInput)
+  , (3, show . Backpack.runInput)
+  , (4, show . CampCleanup.runInput)
+  , (5, show . SupplyStacks.runInput)
+  , (6, show . TuningTrouble.runInput)
+  , (7, show . NoSpaceLeft.runInput)
+  , (8, show . TreetopTreeHouse.runInput)
+  , (9, show . RopeBridge.runInput)
+  , (10, show . CathodeRayTube.runInput)
+  , (11, show . MonkeyInTheMiddle.runInput)
+  , (12, show . HillClimbingAlgorithm.runInput)
+  , (13, show . DistressSignal.runInput)
+  , (14, show . RegolithReservoir.runInput)]
+
 runDay :: Options -> IO ()
-runDay (Options 1) = run Calories.runInput "input/Day1.txt"
-runDay (Options 2) = run RockPaperScissors.runInput "input/Day2.txt"
-runDay (Options 3) = run Backpack.runInput "input/Day3.txt"
-runDay (Options 4) = run CampCleanup.runInput "input/Day4.txt"
-runDay (Options 5) = run SupplyStacks.runInput "input/Day5.txt"
-runDay (Options 6) = run TuningTrouble.runInput "input/Day6.txt"
-runDay (Options 7) = run NoSpaceLeft.runInput "input/Day7.txt"
-runDay (Options 8) = run TreetopTreeHouse.runInput "input/Day8.txt"
-runDay (Options 9) = run RopeBridge.runInput "input/Day9.txt"
-runDay (Options 10) = run CathodeRayTube.runInput "input/Day10.txt"
-runDay (Options 11) = run MonkeyInTheMiddle.runInput "input/Day11.txt"
-runDay (Options 12) = run HillClimbingAlgorithm.runInput "input/Day12.txt"
-runDay (Options 13) = run DistressSignal.runInput "input/Day13.txt"
+runDay (Options opt) = result  
+  where maybeF = M.lookup opt options
+        result = traverse_ (\f -> run f ("input/Day" <> show opt <> ".txt")) maybeF
 
-runDay _ = return ()
 
-run :: Show a => (T.Text -> a) -> FilePath -> IO ()
+run :: (T.Text -> String) -> FilePath -> IO ()
 run action file = do
     result <- action <$> T.readFile file
-    putStrLn $ show result
+    putStrLn $ result
